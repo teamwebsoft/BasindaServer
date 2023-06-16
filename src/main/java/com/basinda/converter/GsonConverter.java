@@ -1,14 +1,14 @@
 package com.basinda.converter;
 
+import org.slf4j.Logger;
 import com.google.gson.Gson;
+import org.slf4j.LoggerFactory;
 import com.google.gson.JsonElement;
 import org.apache.commons.pool2.ObjectPool;
 import org.apache.commons.pool2.impl.GenericObjectPool;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.HashMap;
 
 public class GsonConverter {
     private static final Logger logger = LoggerFactory.getLogger(GsonConverter.class);
