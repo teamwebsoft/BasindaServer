@@ -1,4 +1,4 @@
-package com.basinda;
+package com.basinda.utils;
 
 import com.basinda.converter.GsonConverter;
 import org.slf4j.Logger;
