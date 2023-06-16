@@ -1,13 +1,12 @@
 package com.basinda.entities;
 
-import com.basinda.models.eGenderType;
 import lombok.Data;
 import jakarta.persistence.Id;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import jakarta.persistence.Table;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import com.basinda.models.eGenderType;
 
 import java.util.Date;
 
@@ -28,7 +27,7 @@ public class User {
     private String mobileNumber;
     private String email;
     private String profession;
-    private String devision;
+    private String division;
     private String district;
     private String upozilla;
     private String pourosova;
