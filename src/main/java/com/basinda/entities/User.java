@@ -1,5 +1,6 @@
 package com.basinda.entities;
 
+import jakarta.persistence.Column;
 import lombok.Data;
 import jakarta.persistence.Id;
 import lombok.NoArgsConstructor;
@@ -20,10 +21,14 @@ public class User {
     private String id;
     private String nid;
     private String name;
+    @Column(name = "father_name")
     private String fatherName;
+    @Column(name = "mother_name")
     private String motherName;
+    @Column(name = "gender")
     private eGenderType genderType;
     private Date birthday;
+    @Column(name = "mobile")
     private String mobileNumber;
     private String email;
     private String profession;
@@ -32,8 +37,11 @@ public class User {
     private String upozilla;
     private String pourosova;
     private String area;
+    @Column(name = "word")
     private String wordNo;
+    @Column(name = "post_code")
     private String postCode;
+    @Column(name = "holding")
     private String holdingNumber;
     private String password;
 }

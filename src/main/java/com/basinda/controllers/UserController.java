@@ -1,6 +1,7 @@
 package com.basinda.controllers;
 
 import com.basinda.entities.User;
+import com.basinda.requests.RegistrationRequest;
 import com.basinda.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +19,13 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/register")
-    public ResponseEntity<User> createUser(@RequestBody User user){
-        User createdUser = userService.registerUser(user);
+    public ResponseEntity<User> createUser(@RequestBody RegistrationRequest request){
+        if (request.getPassword().equals(request.getConfirmPassword())){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+        User createdUser = userService.registerUser(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
+
+
 }
