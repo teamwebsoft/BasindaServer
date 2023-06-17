@@ -1,6 +1,7 @@
 package com.basinda.controllers;
 
 import com.basinda.entities.User;
+import com.basinda.requests.LoginRequest;
 import com.basinda.requests.RegistrationRequest;
 import com.basinda.services.UserService;
 import org.springframework.http.HttpStatus;
@@ -27,5 +28,12 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
 
-
+    @PostMapping("/login")
+    public ResponseEntity<HttpStatus> login(@RequestBody LoginRequest request){
+        String response = userService.login(request);
+        if (response.equalsIgnoreCase("valid")){
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

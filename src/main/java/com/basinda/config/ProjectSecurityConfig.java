@@ -18,7 +18,7 @@ public class ProjectSecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers("/actuator","/auth/register","/auth/login").permitAll()
                 .and().httpBasic()
-                .and().formLogin()
+                .and().formLogin().loginProcessingUrl("/auth/login")
                 .and().build();
     }
 
