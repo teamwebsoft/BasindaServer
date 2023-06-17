@@ -1,12 +1,12 @@
 package com.basinda.entities;
 
-import jakarta.persistence.Column;
 import lombok.Data;
 import jakarta.persistence.Id;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import jakarta.persistence.Table;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Column;
 import com.basinda.models.eGenderType;
 
 import java.util.Date;

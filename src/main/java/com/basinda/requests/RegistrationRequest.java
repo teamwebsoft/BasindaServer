@@ -1,7 +1,7 @@
 package com.basinda.requests;
 
-import com.basinda.models.eGenderType;
 import lombok.Data;
+import com.basinda.models.eGenderType;
 
 import java.util.Date;
 

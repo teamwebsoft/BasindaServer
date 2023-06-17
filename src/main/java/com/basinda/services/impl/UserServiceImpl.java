@@ -1,15 +1,15 @@
 package com.basinda.services.impl;
 
-import com.basinda.config.UserLoadService;
 import com.basinda.entities.User;
-import com.basinda.requests.LoginRequest;
-import com.basinda.requests.RegistrationRequest;
-import com.basinda.services.UserService;
 import org.modelmapper.ModelMapper;
-import org.springframework.security.core.userdetails.UserDetails;
+import com.basinda.services.UserService;
+import com.basinda.requests.LoginRequest;
+import com.basinda.config.UserLoadService;
 import org.springframework.stereotype.Service;
 import com.basinda.repositories.UserRepository;
+import com.basinda.requests.RegistrationRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.UUID;

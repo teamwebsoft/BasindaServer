@@ -1,11 +1,11 @@
 package com.basinda.controllers;
 
 import com.basinda.entities.User;
-import com.basinda.requests.LoginRequest;
-import com.basinda.requests.RegistrationRequest;
 import com.basinda.services.UserService;
+import com.basinda.requests.LoginRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import com.basinda.requests.RegistrationRequest;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
