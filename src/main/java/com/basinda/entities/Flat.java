@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Column;
 import com.basinda.models.eAnswerType;
 
 @Data
@@ -27,5 +28,6 @@ public class Flat {
     private String baranda;
     private eAnswerType side;
     private eAnswerType parking;
+    @Column(name = "user_id")
     private String userId;
 }
