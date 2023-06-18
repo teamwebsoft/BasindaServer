@@ -9,7 +9,7 @@
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
         <File>C:/logger/logger.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>logs/archived/logger.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>C:/logger/archived/logger.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <maxFileSize>10MB</maxFileSize>
             <totalSizeCap>20MB</totalSizeCap>
             <maxHistory>60</maxHistory>
