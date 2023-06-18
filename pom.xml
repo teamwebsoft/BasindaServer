@@ -41,6 +41,13 @@
 		</dependency>
 		<!-- dependency end here -->
 
+		<!-- spring mail dependency here -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+		<!-- dependency end here -->
+
 		<!-- model mapper dependency here -->
 		<dependency>
 			<groupId>org.modelmapper</groupId>

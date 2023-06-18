@@ -15,8 +15,8 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "userid")
-    private String userId;
+    private Long userId;
     @Column(name = "ownerid")
-    private String ownerId;
+    private Long ownerId;
     private String content;
 }
