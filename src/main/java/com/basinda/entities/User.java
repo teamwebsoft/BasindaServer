@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import jakarta.persistence.Table;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Column;
 import com.basinda.models.eGenderType;
 
 import java.util.Date;
@@ -21,14 +20,10 @@ public class User {
     private String id;
     private String nid;
     private String name;
-    @Column(name = "father_name")
     private String fatherName;
-    @Column(name = "mother_name")
     private String motherName;
-    @Column(name = "gender")
     private eGenderType genderType;
     private Date birthday;
-    @Column(name = "mobile")
     private String mobileNumber;
     private String email;
     private String profession;
@@ -37,11 +32,8 @@ public class User {
     private String upozilla;
     private String pourosova;
     private String area;
-    @Column(name = "word")
     private String wordNo;
-    @Column(name = "post_code")
     private String postCode;
-    @Column(name = "holding")
     private String holdingNumber;
     private String password;
 }

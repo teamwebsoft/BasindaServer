@@ -25,6 +25,6 @@ public class Flat {
     private String washroom;
     private String kitchen;
     private String baranda;
-    private eAnswerType left;
+    private eAnswerType side;
     private eAnswerType parking;
 }
