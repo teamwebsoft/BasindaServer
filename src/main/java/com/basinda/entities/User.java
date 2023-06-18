@@ -1,14 +1,14 @@
 package com.basinda.entities;
 
+import com.basinda.models.eUserType;
+import jakarta.persistence.*;
 import lombok.Data;
-import jakarta.persistence.Id;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
-import jakarta.persistence.Table;
-import jakarta.persistence.Entity;
 import com.basinda.models.eGenderType;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -36,4 +36,8 @@ public class User {
     private String postCode;
     private String holdingNumber;
     private String password;
+    private eUserType userType;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private List<Flat> flats;
 }

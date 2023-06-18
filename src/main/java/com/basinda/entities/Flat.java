@@ -27,4 +27,5 @@ public class Flat {
     private String baranda;
     private eAnswerType side;
     private eAnswerType parking;
+    private String userId;
 }
