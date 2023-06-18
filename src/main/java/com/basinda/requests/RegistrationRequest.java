@@ -1,6 +1,7 @@
 package com.basinda.requests;
 
 import lombok.Data;
+import com.basinda.models.eUserType;
 import com.basinda.models.eGenderType;
 
 import java.util.Date;
@@ -24,6 +25,7 @@ public class RegistrationRequest {
     private String wordNo;
     private String postCode;
     private String holdingNumber;
+    private eUserType userType;
     private String password;
     private String confirmPassword;
 }
