@@ -18,6 +18,6 @@ public class Division {
     private Long id;
     private String name;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "division_id", referencedColumnName = "id")
+    @JoinColumn(name = "divisionid", referencedColumnName = "id")
     private List<District> districts;
 }

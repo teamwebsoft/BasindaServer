@@ -15,6 +15,6 @@ public class Pourosova {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @Column(name = "district_id")
+    @Column(name = "districtid")
     private Long districtId;
 }

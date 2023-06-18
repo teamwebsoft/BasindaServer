@@ -17,10 +17,10 @@ public class District {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @Column(name = "division_id")
+    @Column(name = "divisionid")
     private Long divisionId;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "district_id", referencedColumnName = "id")
+    @JoinColumn(name = "districtid", referencedColumnName = "id")
     private List<Pourosova> pourosovas;
 }

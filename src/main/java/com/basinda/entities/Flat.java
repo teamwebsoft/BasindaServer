@@ -1,12 +1,9 @@
 package com.basinda.entities;
 
+import jakarta.persistence.*;
 import lombok.Data;
-import jakarta.persistence.Id;
 import lombok.NoArgsConstructor;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Column;
 import com.basinda.models.eAnswerType;
 
 @Data
@@ -16,8 +13,11 @@ import com.basinda.models.eAnswerType;
 @AllArgsConstructor
 public class Flat {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(name = "flatname")
     private String flatName;
+    @Column(name = "flatside")
     private String flatSide;
     private String sqr;
     private String bed;
@@ -28,6 +28,6 @@ public class Flat {
     private String baranda;
     private eAnswerType side;
     private eAnswerType parking;
-    @Column(name = "user_id")
+    @Column(name = "userid")
     private String userId;
 }

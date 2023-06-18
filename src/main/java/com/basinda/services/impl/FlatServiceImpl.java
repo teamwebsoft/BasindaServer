@@ -22,7 +22,6 @@ public class FlatServiceImpl implements FlatService {
 
     @Override
     public Flat createFlat(Flat flat) {
-        flat.setId(UUID.randomUUID().toString());
         return flatRepository.save(flat);
     }
 }

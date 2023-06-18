@@ -1,10 +1,10 @@
 package com.basinda.entities;
 
-import com.basinda.models.eUserType;
-import jakarta.persistence.*;
 import lombok.Data;
+import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import com.basinda.models.eUserType;
 import com.basinda.models.eGenderType;
 
 import java.util.Date;
@@ -17,13 +17,18 @@ import java.util.List;
 @AllArgsConstructor
 public class User {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String nid;
     private String name;
+    @Column(name = "fathername")
     private String fatherName;
+    @Column(name = "mothername")
     private String motherName;
+    @Column(name = "gendertype")
     private eGenderType genderType;
     private Date birthday;
+    @Column(name = "mobilenumber")
     private String mobileNumber;
     private String email;
     private String profession;
@@ -32,10 +37,14 @@ public class User {
     private String upozilla;
     private String pourosova;
     private String area;
+    @Column(name = "wordno")
     private String wordNo;
+    @Column(name = "postcode")
     private String postCode;
+    @Column(name = "holdingnumber")
     private String holdingNumber;
     private String password;
+    @Column(name = "usertype")
     private eUserType userType;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", referencedColumnName = "id")

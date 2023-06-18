@@ -42,7 +42,6 @@ public class UserServiceImpl implements UserService {
     public User registerUser(RegistrationRequest request) {
 
         User user = modelMapper.map(request, User.class);
-        user.setId(UUID.randomUUID().toString());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
