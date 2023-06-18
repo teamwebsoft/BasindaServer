@@ -46,6 +46,9 @@ public class User {
     private String password;
     @Column(name = "usertype")
     private eUserType userType;
+    @Column(name = "verificationcode", length = 64)
+    private String verificationCode;
+    private boolean enabled;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "userid", referencedColumnName = "id")
     private List<Flat> flats;
