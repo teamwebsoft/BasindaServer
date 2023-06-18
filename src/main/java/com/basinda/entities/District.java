@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Entity
 @Table(name = "districts")
@@ -15,8 +17,10 @@ public class District {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @Column(name = "division_id")
+    private Long divisionId;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "division_id", referencedColumnName = "id")
-    private Division division;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "district_id", referencedColumnName = "id")
+    private List<Pourosova> pourosovas;
 }

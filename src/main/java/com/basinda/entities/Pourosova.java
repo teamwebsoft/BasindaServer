@@ -15,8 +15,6 @@ public class Pourosova {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "district_id", referencedColumnName = "id")
-    private District district;
+    @Column(name = "district_id")
+    private Long districtId;
 }

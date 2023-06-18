@@ -3,6 +3,9 @@ package com.basinda.controllers;
 import com.basinda.entities.District;
 import com.basinda.entities.Division;
 import com.basinda.entities.Pourosova;
+import com.basinda.requests.DistrictRequest;
+import com.basinda.requests.DivisionRequest;
+import com.basinda.requests.PourosovaRequest;
 import org.springframework.http.HttpStatus;
 import com.basinda.services.LocationService;
 import org.springframework.http.ResponseEntity;
@@ -18,19 +21,19 @@ public class LocationController {
     private LocationService locationService;
 
     @PostMapping("/admin/create/division")
-    public ResponseEntity<Division> createDivision(@RequestBody Division model){
+    public ResponseEntity<Division> createDivision(@RequestBody DivisionRequest model){
         Division division = locationService.createDivision(model);
         return ResponseEntity.status(HttpStatus.CREATED).body(division);
     }
 
     @PostMapping("/admin/create/district")
-    public ResponseEntity<District> createDistrict(@RequestBody District model){
+    public ResponseEntity<District> createDistrict(@RequestBody DistrictRequest model){
         District district = locationService.createDistrict(model);
         return ResponseEntity.status(HttpStatus.CREATED).body(district);
     }
 
     @PostMapping("/admin/create/pourosova")
-    public ResponseEntity<Pourosova> createPourosova(@RequestBody Pourosova model){
+    public ResponseEntity<Pourosova> createPourosova(@RequestBody PourosovaRequest model){
         Pourosova pourosova = locationService.createPourosova(model);
         return ResponseEntity.status(HttpStatus.CREATED).body(pourosova);
     }
