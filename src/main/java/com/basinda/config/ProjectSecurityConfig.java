@@ -15,8 +15,8 @@ public class ProjectSecurityConfig {
         return http
                 .cors().disable()
                 .csrf().disable()
-                .authorizeHttpRequests()
-                .requestMatchers("/actuator","/auth/register","/auth/login").permitAll()
+                .authorizeHttpRequests().anyRequest().permitAll()
+                //.requestMatchers("/actuator","/auth/register","/auth/login").permitAll()
                 .and().httpBasic()
                 .and().formLogin()
                 .and().build();

@@ -46,11 +46,11 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public List<District> readDistrictForDivision(Long divisionId) {
-        return districtRepository.findByDivision(divisionId);
+        return districtRepository.findByDivisionId(divisionId);
     }
 
     @Override
     public List<Pourosova> readPourosovaForDistrict(Long districtId) {
-        return pourosovaRepository.findByDistrict(districtId);
+        return pourosovaRepository.findByDistrictId(districtId);
     }
 }

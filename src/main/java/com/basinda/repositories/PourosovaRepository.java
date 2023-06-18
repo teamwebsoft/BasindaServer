@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface PourosovaRepository extends JpaRepository<Pourosova, Long> {
-    List<Pourosova> findByDistrict(Long divisionId);
+    List<Pourosova> findByDistrictId(Long divisionId);
 }
