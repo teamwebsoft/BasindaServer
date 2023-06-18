@@ -47,14 +47,14 @@ public class User {
     @Column(name = "usertype")
     private eUserType userType;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "userid", referencedColumnName = "id")
     private List<Flat> flats;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "userid", referencedColumnName = "id")
     private List<Comment> comments1;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "owner_id", referencedColumnName = "id")
+    @JoinColumn(name = "ownerid", referencedColumnName = "id")
     private List<Comment> comments2;
 }
