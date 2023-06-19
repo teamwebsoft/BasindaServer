@@ -1,17 +1,17 @@
 package com.basinda.services.impl;
 
 import com.basinda.entities.User;
-import jakarta.mail.internet.MimeMessage;
 import org.modelmapper.ModelMapper;
 import jakarta.mail.MessagingException;
 import com.basinda.services.UserService;
 import com.basinda.requests.LoginRequest;
+import jakarta.mail.internet.MimeMessage;
 import com.basinda.config.UserLoadService;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import com.basinda.repositories.UserRepository;
 import com.basinda.requests.RegistrationRequest;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.modelmapper.internal.bytebuddy.utility.RandomString;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private ModelMapper modelMapper;
-
+    
     @Autowired
     private JavaMailSender mailSender;
 
@@ -37,6 +37,7 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserLoadService userLoadService;
+
 
     @Override
     public String login(LoginRequest request) {
@@ -61,6 +62,7 @@ public class UserServiceImpl implements UserService {
             sendVerificationEmail(response, applicationUrl);
         }catch (Exception ex){
             // TODO : EXCEPTION HANDLE HERE
+            ex.printStackTrace();
         }
         return response;
     }

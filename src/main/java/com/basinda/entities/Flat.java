@@ -29,5 +29,5 @@ public class Flat {
     private eAnswerType side;
     private eAnswerType parking;
     @Column(name = "userid")
-    private String userId;
+    private Long userId;
 }

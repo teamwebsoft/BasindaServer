@@ -1,11 +1,11 @@
 package com.basinda.controllers;
 
 import com.basinda.entities.User;
+import com.basinda.utils.EmailUtil;
 import com.basinda.services.UserService;
 import com.basinda.requests.LoginRequest;
-import com.basinda.utils.UserUtil;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
 import com.basinda.requests.RegistrationRequest;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +26,7 @@ public class UserController {
         if (!model.getPassword().equals(model.getConfirmPassword())){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
-        String applicationUrl = UserUtil.getApplicationUrl(request);
+        String applicationUrl = EmailUtil.getApplicationUrl(request);
         User createdUser = userService.registerUser(model, applicationUrl);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
