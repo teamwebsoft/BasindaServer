@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private ModelMapper modelMapper;
-    
+
     @Autowired
     private JavaMailSender mailSender;
 
@@ -67,14 +67,14 @@ public class UserServiceImpl implements UserService {
         return response;
     }
 
-    private void sendVerificationEmail(User user, String siteURL)
+    private void sendVerificationEmail(User user, String applicationUrl)
             throws MessagingException, UnsupportedEncodingException {
         String toAddress = user.getEmail();
         String fromAddress = "md.farid.ice@gmail.com";
         String senderName = "Teamwebsoft";
         String subject = "Please verify your registration";
         String content = "Dear [[name]],<br>"
-                + "Please click the link below to verify your registration:<br>"
+                + "Please click the link below to verify your registration<br>"
                 + "<h3><a href=\"[[URL]]\" target=\"_self\">VERIFY</a></h3>"
                 + "Thank you,<br>"
                 + "Your company name.";
@@ -87,9 +87,9 @@ public class UserServiceImpl implements UserService {
         helper.setSubject(subject);
 
         content = content.replace("[[name]]", user.getName());
-        String verifyURL = siteURL + "/verify?code=" + user.getVerificationCode();
+        String verifyUrl = applicationUrl + "/verify?code=" + user.getVerificationCode();
 
-        content = content.replace("[[URL]]", verifyURL);
+        content = content.replace("[[URL]]", verifyUrl);
 
         helper.setText(content, true);
 
