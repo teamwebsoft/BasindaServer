@@ -67,6 +67,20 @@ public class UserServiceImpl implements UserService {
         return response;
     }
 
+    @Override
+    public boolean verify(String verificationCode) {
+        User user = userRepository.findByVerificationCode(verificationCode);
+        if (user == null || user.isEnabled()){
+            return false;
+        }
+        else{
+            user.setEnabled(true);
+            user.setVerificationCode(null);
+            userRepository.save(user);
+            return true;
+        }
+    }
+
     private void sendVerificationEmail(User user, String applicationUrl)
             throws MessagingException, UnsupportedEncodingException {
         String toAddress = user.getEmail();

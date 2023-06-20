@@ -7,4 +7,5 @@ import com.basinda.requests.RegistrationRequest;
 public interface UserService {
     String login(LoginRequest request);
     User registerUser(RegistrationRequest request, String applicationUrl);
+    boolean verify(String verificationCode);
 }
