@@ -14,7 +14,7 @@ public class SendOTPUtil {
     private final String ACCOUNT_STD = "";
     private final String FROM_NUMBER = "+8801315656967";
 
-    public void send(String phone) throws ParseException {
+    /*public void send(String phone) throws ParseException {
         Twilio.init(ACCOUNT_STD, AUTH_TOKEN);
         int min = 100000;
         int max = 999999;
@@ -27,7 +27,7 @@ public class SendOTPUtil {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = simpleDateFormat.parse(myDate.toString());
         long millis = date.getTime();
-    }
+    }*/
 
     public void receive(MultiValueMap<String, String> smsCallBack){
 
