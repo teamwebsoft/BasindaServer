@@ -48,6 +48,19 @@
 		</dependency>
 		<!-- dependency end here -->
 
+		<!-- spring send OTP dependency here -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-websocket</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.twilio.sdk</groupId>
+			<artifactId>twilio</artifactId>
+			<version>9.2.5</version>
+		</dependency>
+		<!-- spring send OTP dependency end here -->
+
 		<!-- model mapper dependency here -->
 		<dependency>
 			<groupId>org.modelmapper</groupId>
