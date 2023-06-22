@@ -1,11 +1,11 @@
 package com.basinda.controllers;
 
 import com.basinda.entities.User;
-import com.basinda.responses.ResponseHeader;
 import com.basinda.utils.EmailUtil;
 import com.basinda.services.UserService;
 import com.basinda.requests.LoginRequest;
 import org.springframework.http.HttpStatus;
+import com.basinda.responses.ResponseHeader;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
 import com.basinda.requests.RegistrationRequest;
@@ -53,11 +53,16 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<HttpStatus> login(@RequestBody LoginRequest request){
-        String response = userService.login(request);
-        if (response.equalsIgnoreCase("valid")){
-            return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<Response> login(@RequestBody LoginRequest request){
+        Response response = new Response();
+        String userLogin = userService.login(request);
+        if (userLogin.equalsIgnoreCase("valid")){
+            response.setContent("User Login Successfully.");
         }
-        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        else{
+            response.setStatusCode(HttpStatus.NO_CONTENT);
+            response.setContent("Username or Password incorrect.");
+        }
+        return ResponseEntity.status(response.getStatusCode()).body(response);
     }
 }
