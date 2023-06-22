@@ -1,10 +1,12 @@
 package com.basinda.controllers;
 
+import com.basinda.responses.ResponseHeader;
 import com.basinda.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,13 +16,24 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    public class Response extends ResponseHeader{
+
+    }
+
     @GetMapping("/verify")
-    public ResponseEntity<HttpStatus> registrationVerify(@Param("code") String code){
+    public ResponseEntity<Response> registrationVerify(@RequestParam("code") String code){
+        Response response = new Response();
+
         if (userService.verify(code)){
-            return ResponseEntity.ok(null);
+            response.setStatusCode(HttpStatus.OK);
+            response.setStatus(true);
+            response.setContent("User verified successfully.");
         }
         else{
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            response.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
+            response.setStatus(true);
+            response.setContent("Something went wrong please try again.");
         }
+        return ResponseEntity.status(response.getStatusCode()).body(response);
     }
 }

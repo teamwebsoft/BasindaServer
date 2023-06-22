@@ -19,8 +19,8 @@ public class District {
     private Long id;
     private String name;
     @Column(name = "divisionid")
+    @JsonIgnore
     private Long divisionId;
-
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "districtid", referencedColumnName = "id")

@@ -10,9 +10,9 @@ import com.basinda.requests.PourosovaRequest;
 import java.util.List;
 
 public interface LocationService {
-    Division createDivision(DivisionRequest request);
-    District createDistrict(DistrictRequest request);
-    Pourosova createPourosova(PourosovaRequest request);
+    String createDivision(DivisionRequest request);
+    String createDistrict(DistrictRequest request);
+    String createPourosova(PourosovaRequest request);
     List<Division> readDivision();
     List<District> readDistrictForDivision(Long divisionId);
     List<Pourosova> readPourosovaForDistrict(Long districtId);

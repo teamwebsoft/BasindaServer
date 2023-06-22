@@ -6,6 +6,7 @@ import com.basinda.entities.Pourosova;
 import com.basinda.requests.DistrictRequest;
 import com.basinda.requests.DivisionRequest;
 import com.basinda.requests.PourosovaRequest;
+import com.basinda.responses.ResponseHeader;
 import org.springframework.http.HttpStatus;
 import com.basinda.services.LocationService;
 import org.springframework.http.ResponseEntity;
@@ -20,22 +21,59 @@ public class LocationController {
     @Autowired
     private LocationService locationService;
 
+    public class Response extends ResponseHeader{
+
+    }
+
     @PostMapping("/admin/create/division")
-    public ResponseEntity<Division> createDivision(@RequestBody DivisionRequest model){
-        Division division = locationService.createDivision(model);
-        return ResponseEntity.status(HttpStatus.CREATED).body(division);
+    public ResponseEntity<Response> createDivision(@RequestBody DivisionRequest model){
+        Response response = new Response();
+        String createdDivision = locationService.createDivision(model);
+        if (createdDivision.equalsIgnoreCase("created")){
+            response.setStatusCode(HttpStatus.CREATED);
+            response.setStatus(true);
+            response.setContent("Division created successfully.");
+        }
+        else{
+            response.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
+            response.setStatus(true);
+            response.setContent("Something went wrong please try again.");
+        }
+        return ResponseEntity.status(response.getStatusCode()).body(response);
     }
 
     @PostMapping("/admin/create/district")
-    public ResponseEntity<District> createDistrict(@RequestBody DistrictRequest model){
-        District district = locationService.createDistrict(model);
-        return ResponseEntity.status(HttpStatus.CREATED).body(district);
+    public ResponseEntity<Response> createDistrict(@RequestBody DistrictRequest model){
+        Response response = new Response();
+        String createdDistrict = locationService.createDistrict(model);
+        if (createdDistrict.equalsIgnoreCase("created")){
+            response.setStatusCode(HttpStatus.CREATED);
+            response.setStatus(true);
+            response.setContent("District created successfully.");
+        }
+        else{
+            response.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
+            response.setStatus(true);
+            response.setContent("Something went wrong please try again.");
+        }
+        return ResponseEntity.status(response.getStatusCode()).body(response);
     }
 
     @PostMapping("/admin/create/pourosova")
-    public ResponseEntity<Pourosova> createPourosova(@RequestBody PourosovaRequest model){
-        Pourosova pourosova = locationService.createPourosova(model);
-        return ResponseEntity.status(HttpStatus.CREATED).body(pourosova);
+    public ResponseEntity<Response> createPourosova(@RequestBody PourosovaRequest model){
+        Response response = new Response();
+        String createdPourosova = locationService.createPourosova(model);
+        if (createdPourosova.equalsIgnoreCase("created")){
+            response.setStatusCode(HttpStatus.CREATED);
+            response.setStatus(true);
+            response.setContent("Pourosova created successfully.");
+        }
+        else{
+            response.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
+            response.setStatus(true);
+            response.setContent("Something went wrong please try again.");
+        }
+        return ResponseEntity.status(response.getStatusCode()).body(response);
     }
 
     @GetMapping("/divisions")
