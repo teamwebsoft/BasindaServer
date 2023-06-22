@@ -1,6 +1,7 @@
 package com.basinda.controllers;
 
 import com.basinda.entities.User;
+import com.basinda.responses.ResponseHeader;
 import com.basinda.utils.EmailUtil;
 import com.basinda.services.UserService;
 import com.basinda.requests.LoginRequest;
@@ -21,14 +22,34 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
+    public class Response extends ResponseHeader{
+
+    }
+
     @PostMapping("/register")
-    public ResponseEntity<User> createUser(@RequestBody RegistrationRequest model, final HttpServletRequest request){
+    public ResponseEntity<Response> createUser(@RequestBody RegistrationRequest model, final HttpServletRequest request){
+        Response response = new Response();
+
         if (!model.getPassword().equals(model.getConfirmPassword())){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            response.setStatusCode(HttpStatus.BAD_REQUEST);
+            response.setStatus(true);
+            response.setContent("Password does not match. Please try again.");
         }
-        String applicationUrl = EmailUtil.getApplicationUrl(request);
-        User createdUser = userService.registerUser(model, applicationUrl);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
+        else{
+            String applicationUrl = EmailUtil.getApplicationUrl(request);
+            User createdUser = userService.registerUser(model, applicationUrl);
+            if (createdUser==null){
+                response.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
+                response.setStatus(true);
+                response.setContent("Something went wrong please try again.");
+            }
+            else {
+                response.setStatusCode(HttpStatus.CREATED);
+                response.setStatus(true);
+                response.setContent("User created successfully please before login verify your email.");
+            }
+        }
+        return ResponseEntity.status(response.statusCode).body(response);
     }
 
     @PostMapping("/login")
