@@ -1,9 +1,12 @@
 package com.basinda.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import org.modelmapper.internal.bytebuddy.asm.Advice;
 
 @Data
 @Entity
@@ -15,6 +18,7 @@ public class Pourosova {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @JsonIgnore
     @Column(name = "districtid")
     private Long districtId;
 }

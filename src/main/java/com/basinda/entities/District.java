@@ -1,5 +1,6 @@
 package com.basinda.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
@@ -20,7 +21,8 @@ public class District {
     @Column(name = "divisionid")
     private Long divisionId;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "districtid", referencedColumnName = "id")
     private List<Pourosova> pourosovas;
 }
