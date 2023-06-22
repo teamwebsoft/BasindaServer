@@ -1,15 +1,17 @@
 package com.basinda.services.impl;
 
-import com.basinda.entities.Comment;
 import com.basinda.entities.User;
-import com.basinda.repositories.UserRepository;
+import com.basinda.entities.Comment;
 import com.basinda.services.CommentService;
+import org.springframework.stereotype.Service;
+import com.basinda.repositories.UserRepository;
 import com.basinda.repositories.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
 import java.util.Optional;
 
-
+@Service
 public class CommentServiceImpl implements CommentService {
 
     @Autowired
@@ -26,7 +28,7 @@ public class CommentServiceImpl implements CommentService {
             if (owner != null){
                 Comment comment = commentRepository.save(request);
                 if (comment != null){
-                    return "Created.";
+                    return "Created";
                 }
                 else{
                     return "Something went wrong.";
@@ -39,5 +41,10 @@ public class CommentServiceImpl implements CommentService {
         else{
             return "User not found.";
         }
+    }
+
+    @Override
+    public List<Comment> findByUserId(Long userId) {
+        return commentRepository.findByUserId(userId);
     }
 }
