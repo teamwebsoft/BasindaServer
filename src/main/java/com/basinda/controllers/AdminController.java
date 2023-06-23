@@ -1,12 +1,11 @@
 package com.basinda.controllers;
 
-import com.basinda.responses.ResponseHeader;
-import com.basinda.services.UserService;
-import com.basinda.requests.ApproveRequest;
 import com.basinda.utils.EmailUtil;
-import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.http.HttpRequest;
+import com.basinda.services.UserService;
 import org.springframework.http.HttpStatus;
+import com.basinda.requests.ApproveRequest;
+import com.basinda.responses.ResponseHeader;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
