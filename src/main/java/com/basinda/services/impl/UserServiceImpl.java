@@ -7,6 +7,7 @@ import com.basinda.services.UserService;
 import com.basinda.requests.LoginRequest;
 import jakarta.mail.internet.MimeMessage;
 import com.basinda.config.UserLoadService;
+import com.basinda.requests.ApproveRequest;
 import org.springframework.stereotype.Service;
 import com.basinda.repositories.UserRepository;
 import com.basinda.requests.RegistrationRequest;
@@ -18,6 +19,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -81,6 +83,27 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public boolean approveUser(ApproveRequest request, String applicationUrl)  {
+        User user = userRepository.findById(request.getUserId()).orElseThrow( () -> new RuntimeException("User not found."));
+        if (user != null){
+            try {
+                sendConfirmEmail(user, applicationUrl);
+                user.setRegistered(true);
+                User response = userRepository.save(user);
+                if (response != null){
+                    return true;
+                }
+            }
+            catch (Exception ex){
+                ex.printStackTrace();
+                return false;
+            }
+        }
+        return false;
+    }
+
+    /** for verify email sender*/
     private void sendVerificationEmail(User user, String applicationUrl)
             throws MessagingException, UnsupportedEncodingException {
         String toAddress = user.getEmail();
@@ -105,6 +128,29 @@ public class UserServiceImpl implements UserService {
 
         content = content.replace("[[URL]]", verifyUrl);
 
+        helper.setText(content, true);
+
+        mailSender.send(message);
+    }
+
+    /** for confirmation email sender*/
+    private void sendConfirmEmail(User user, String applicationUrl)
+            throws MessagingException, UnsupportedEncodingException {
+        String toAddress = user.getEmail();
+        String fromAddress = "md.farid.ice@gmail.com";
+        String senderName = "Teamwebsoft";
+        String subject = "Confirmation";
+        String content = "Dear [[name]],<br>"
+                + "Your Account Approved You Can Login Now."
+                + "Thank you,<br>"
+                + "Teamwebsoft";
+
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+
+        helper.setFrom(fromAddress, senderName);
+        helper.setTo(toAddress);
+        helper.setSubject(subject);
         helper.setText(content, true);
 
         mailSender.send(message);
