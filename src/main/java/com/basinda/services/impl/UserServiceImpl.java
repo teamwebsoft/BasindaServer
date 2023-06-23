@@ -57,6 +57,7 @@ public class UserServiceImpl implements UserService {
         /** set email verification code and enable false*/
         user.setVerificationCode(randomCode);
         user.setEnabled(false);
+        user.setRegistered(false);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         User response = userRepository.save(user);
         /** send mail here */
