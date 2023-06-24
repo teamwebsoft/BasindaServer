@@ -1,9 +1,9 @@
 package com.basinda.config;
 
 import com.basinda.entities.User;
-import com.basinda.exceptions.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import com.basinda.repositories.UserRepository;
+import com.basinda.exceptions.ResourceNotFoundException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
