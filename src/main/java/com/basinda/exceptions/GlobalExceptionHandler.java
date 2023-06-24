@@ -16,7 +16,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<Response> resourceNotFoundException(ResourceNotFoundException ex){
         Response response = new Response();
-        response.setStatusCode(HttpStatus.NO_CONTENT);
+        response.setStatusCode(HttpStatus.NOT_FOUND);
         response.setStatus(true);
         response.setContent(ex.getMessage());
         return ResponseEntity.status(response.getStatusCode()).body(response);

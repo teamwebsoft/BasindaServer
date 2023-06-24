@@ -27,7 +27,7 @@ public class UserLoadService implements UserDetailsService {
         List<User> users = userRepository.findByEmail(username);
 
         if (users.size() == 0){
-            throw new UsernameNotFoundException("User not found.");
+            throw new ResourceNotFoundException("User is not registered yet. Please register first");
         }
         else{
             if (!users.get(0).isEnabled() || !users.get(0).isRegistered()){
