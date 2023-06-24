@@ -19,8 +19,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.io.UnsupportedEncodingException;
-import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {

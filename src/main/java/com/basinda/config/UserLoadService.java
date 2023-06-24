@@ -24,10 +24,14 @@ public class UserLoadService implements UserDetailsService {
         List<GrantedAuthority> authorities = null;
 
         List<User> users = userRepository.findByEmail(username);
+
         if (users.size() == 0){
             throw new UsernameNotFoundException("User not found.");
         }
         else{
+            if (!users.get(0).isEnabled() || !users.get(0).isRegistered()){
+                throw new UsernameNotFoundException("User is not enable or not approved yet.");
+            }
             email = users.get(0).getEmail();
             password = users.get(0).getPassword();
             authorities = new ArrayList<>();
