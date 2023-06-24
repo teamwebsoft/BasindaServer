@@ -1,6 +1,7 @@
 package com.basinda.config;
 
 import com.basinda.entities.User;
+import com.basinda.exceptions.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import com.basinda.repositories.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
@@ -19,7 +20,7 @@ public class UserLoadService implements UserDetailsService {
     private UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, ResourceNotFoundException {
         String email, password = null;
         List<GrantedAuthority> authorities = null;
 
@@ -30,7 +31,7 @@ public class UserLoadService implements UserDetailsService {
         }
         else{
             if (!users.get(0).isEnabled() || !users.get(0).isRegistered()){
-                throw new UsernameNotFoundException("User is not enable or not approved yet.");
+                throw new ResourceNotFoundException("User is not enable or not approved yet.");
             }
             email = users.get(0).getEmail();
             password = users.get(0).getPassword();
