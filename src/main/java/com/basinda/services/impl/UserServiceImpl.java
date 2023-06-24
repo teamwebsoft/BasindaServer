@@ -107,7 +107,7 @@ public class UserServiceImpl implements UserService {
         String toAddress = user.getEmail();
         String fromAddress = "md.farid.ice@gmail.com";
         String senderName = "Teamwebsoft";
-        String subject = "Please verify your registration";
+        String subject = "Verification";
         String content = "Dear [[name]],<br>"
                 + "Please click the link below to verify your registration<br>"
                 + "<h3><a href=\"[[URL]]\" target=\"_self\">VERIFY</a></h3>"
@@ -149,8 +149,8 @@ public class UserServiceImpl implements UserService {
         helper.setFrom(fromAddress, senderName);
         helper.setTo(toAddress);
         helper.setSubject(subject);
+        content = content.replace("[[name]]", user.getName());
         helper.setText(content, true);
-
         mailSender.send(message);
     }
 }
