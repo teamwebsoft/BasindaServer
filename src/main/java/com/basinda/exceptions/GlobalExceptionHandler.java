@@ -21,4 +21,13 @@ public class GlobalExceptionHandler {
         response.setContent(ex.getMessage());
         return ResponseEntity.status(response.getStatusCode()).body(response);
     }
+
+    @ExceptionHandler(UserAlreadyExistException.class)
+    public ResponseEntity<Response> userAlreadyExistException(UserAlreadyExistException ex){
+        Response response = new Response();
+        response.setStatusCode(HttpStatus.CONFLICT);
+        response.setStatus(true);
+        response.setContent(ex.getMessage());
+        return ResponseEntity.status(response.getStatusCode()).body(response);
+    }
 }
