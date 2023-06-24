@@ -1,6 +1,7 @@
 package com.basinda.config;
 
 import com.basinda.entities.User;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 import com.basinda.repositories.UserRepository;
 import com.basinda.exceptions.ResourceNotFoundException;
@@ -36,7 +37,7 @@ public class UserLoadService implements UserDetailsService {
             email = users.get(0).getEmail();
             password = users.get(0).getPassword();
             authorities = new ArrayList<>();
-            //authorities.add(new SimpleGrantedAuthority(users.get(0).getRole()));
+            authorities.add(new SimpleGrantedAuthority("User"));
         }
         return new org.springframework.security.core.userdetails.User(email,password,authorities);
     }
