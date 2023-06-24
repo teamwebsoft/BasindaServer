@@ -6,10 +6,10 @@ import com.basinda.services.CommentService;
 import org.springframework.stereotype.Service;
 import com.basinda.repositories.UserRepository;
 import com.basinda.repositories.CommentRepository;
+import com.basinda.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CommentServiceImpl implements CommentService {
@@ -21,26 +21,24 @@ public class CommentServiceImpl implements CommentService {
     private CommentRepository commentRepository;
 
     @Override
-    public String createComment(Comment request) {
-        Optional<User> user = userRepository.findById(request.getUserId());
-        if (user != null){
-            Optional<User> owner = userRepository.findById(request.getOwnerId());
-            if (owner != null){
+    public String createComment(Comment request) throws ResourceNotFoundException{
+        User user = userRepository.findById(request.getUserId()).orElseThrow(
+                () ->  new ResourceNotFoundException("User not found.")
+        );
+        if (user != null) {
+            User owner = userRepository.findById(request.getOwnerId()).orElseThrow(
+                    () -> new ResourceNotFoundException("Owner not found.")
+            );
+            if (owner != null) {
                 Comment comment = commentRepository.save(request);
-                if (comment != null){
+                if (comment != null) {
                     return "Created";
-                }
-                else{
+                } else {
                     return "Something went wrong.";
                 }
             }
-            else{
-                return "Please make your comment user not found.";
-            }
         }
-        else{
-            return "User not found.";
-        }
+        return "Something went wrong.";
     }
 
     @Override

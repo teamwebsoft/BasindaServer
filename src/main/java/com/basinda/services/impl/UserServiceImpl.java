@@ -96,7 +96,6 @@ public class UserServiceImpl implements UserService {
             }
             catch (Exception ex){
                 ex.printStackTrace();
-                return false;
             }
         }
         return false;
