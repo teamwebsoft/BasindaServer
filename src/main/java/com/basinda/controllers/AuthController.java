@@ -1,13 +1,13 @@
 package com.basinda.controllers;
 
 import com.basinda.entities.User;
-import com.basinda.repositories.UserRepository;
 import com.basinda.utils.EmailUtil;
 import com.basinda.models.eUserType;
 import com.basinda.services.UserService;
 import com.basinda.requests.LoginRequest;
 import org.springframework.http.HttpStatus;
 import com.basinda.responses.ResponseHeader;
+import com.basinda.repositories.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
 import com.basinda.requests.RegistrationRequest;
@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/auth")
