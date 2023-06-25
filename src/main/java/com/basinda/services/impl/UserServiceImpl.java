@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
             authentication = manager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(),request.getPassword()));
             SecurityContextHolder.getContext().setAuthentication(authentication);
             String token = jwtTokenUtil.generateToken();
-            res.setHeader(SecurityConstants.JWT_HEADER,token);
+            res.setHeader(SecurityConstants.JWT_HEADER,"Bearer "+token);
         }
         catch (BadCredentialsException ex){
             return "Invalid";
