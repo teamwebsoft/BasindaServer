@@ -80,7 +80,7 @@ public class UserServiceImpl implements UserService {
         /** set email verification code and enable false*/
         user.setVerificationCode(randomCode);
         user.setEnabled(false);
-        user.setRegistered(false);
+        user.setEnabled(Boolean.FALSE);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         User response = userRepository.save(user);
         /** send mail here */
@@ -96,7 +96,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean verify(String verificationCode) {
         User user = userRepository.findByVerificationCode(verificationCode);
-        if (user == null || user.isEnabled()){
+        if (user == null || user.getEnabled()){
             return false;
         }
         else{
@@ -113,7 +113,7 @@ public class UserServiceImpl implements UserService {
         if (user != null){
             try {
                 sendConfirmEmail(user, applicationUrl);
-                user.setRegistered(true);
+                user.setIsRegistered(Boolean.TRUE);
                 User response = userRepository.save(user);
                 if (response != null){
                     return true;

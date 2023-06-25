@@ -32,8 +32,8 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
         user.setEmail("admin@gmail.com");
         user.setProfession("Software Eng.");
         user.setPassword(passwordEncoder.encode("12345"));
-        user.setEnabled(true);
-        user.setRegistered(true);
+        user.setEnabled(Boolean.TRUE);
+        user.setIsRegistered(Boolean.TRUE);
         user.setUserType(eUserType.eAdmin);
         userRepository.save(user);
     }

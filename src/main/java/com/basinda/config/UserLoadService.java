@@ -31,7 +31,7 @@ public class UserLoadService implements UserDetailsService {
             throw new ResourceNotFoundException("User is not registered yet. Please register first");
         }
         else{
-            if (!users.get(0).isEnabled() || !users.get(0).isRegistered()){
+            if (!users.get(0).getEnabled() || !users.get(0).getIsRegistered()){
                 throw new ResourceNotFoundException("User is not enable or not approved yet.");
             }
             email = users.get(0).getEmail();

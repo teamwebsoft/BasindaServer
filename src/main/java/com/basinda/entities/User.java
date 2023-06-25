@@ -48,9 +48,9 @@ public class User {
     private eUserType userType;
     @Column(name = "verificationcode", length = 64)
     private String verificationCode;
-    private boolean enabled;
+    private Boolean enabled;
     @Column(name = "isregistered")
-    private boolean isRegistered;
+    private Boolean isRegistered;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "userid", referencedColumnName = "id")
     private List<Flat> flats;
