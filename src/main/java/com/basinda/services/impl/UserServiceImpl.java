@@ -3,7 +3,7 @@ package com.basinda.services.impl;
 import com.basinda.contants.SecurityConstants;
 import com.basinda.entities.User;
 import com.basinda.exceptions.ResourceNotFoundException;
-import com.basinda.utils.JWTTokenUtil;
+import com.basinda.utils.JwtUtils;
 import jakarta.servlet.http.HttpServletResponse;
 import org.modelmapper.ModelMapper;
 import jakarta.mail.MessagingException;
@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
     private JavaMailSender mailSender;
 
     @Autowired
-    private JWTTokenUtil jwtTokenUtil;
+    private JwtUtils jwtTokenUtil;
 
     @Autowired
     private UserRepository userRepository;

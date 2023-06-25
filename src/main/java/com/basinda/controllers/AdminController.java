@@ -1,6 +1,6 @@
 package com.basinda.controllers;
 
-import com.basinda.utils.EmailUtil;
+import com.basinda.utils.EmailUtils;
 import com.basinda.services.UserService;
 import org.springframework.http.HttpStatus;
 import com.basinda.requests.ApproveRequest;
@@ -27,7 +27,7 @@ public class AdminController {
     @PostMapping("/approve")
     public ResponseEntity<Response> approved(@RequestBody ApproveRequest request, final HttpServletRequest servletRequest){
         Response response = new Response();
-        String applicationUrl = EmailUtil.getApplicationUrl(servletRequest);
+        String applicationUrl = EmailUtils.getApplicationUrl(servletRequest);
 
         try {
             boolean isregistered = userService.approveUser(request,applicationUrl);

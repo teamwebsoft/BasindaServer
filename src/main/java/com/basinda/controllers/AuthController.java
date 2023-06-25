@@ -1,18 +1,18 @@
 package com.basinda.controllers;
 
 import com.basinda.entities.User;
-import com.basinda.exceptions.ResourceNotFoundException;
-import com.basinda.utils.EmailUtil;
+import com.basinda.utils.EmailUtils;
 import com.basinda.models.eUserType;
 import com.basinda.services.UserService;
 import com.basinda.requests.LoginRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 import com.basinda.responses.ResponseHeader;
 import com.basinda.repositories.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
+import jakarta.servlet.http.HttpServletResponse;
 import com.basinda.requests.RegistrationRequest;
+import com.basinda.exceptions.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,7 +45,7 @@ public class AuthController {
             response.setContent("Password does not match. Please try again.");
         }
         else{
-            String applicationUrl = EmailUtil.getApplicationUrl(request);
+            String applicationUrl = EmailUtils.getApplicationUrl(request);
             User createdUser = userService.registerUser(model, applicationUrl);
             if (createdUser==null){
                 response.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);

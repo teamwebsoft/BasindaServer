@@ -9,7 +9,7 @@ import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-public class SendOTPUtil {
+public class SendOTPUtils {
     private final String AUTH_TOKEN = "EPP8nMTjxEMj52J16Qy04wcnjFwkv7jx";
     private final String ACCOUNT_STD = "SK3309e91e70ba5f28b945b8f46a88ea30";
     private final String FROM_NUMBER = "+8801315656967";

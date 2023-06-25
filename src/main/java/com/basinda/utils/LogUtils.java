@@ -3,10 +3,10 @@ package com.basinda.utils;
 import org.slf4j.Logger;
 import com.basinda.converter.GsonConverter;
 
-public class LogUtil {
+public class LogUtils {
     private static final String EXCEPTION_LOG = "GsonConverter.ObjectToJson has Exception : ";
 
-    private LogUtil(){
+    private LogUtils(){
 
     }
 
