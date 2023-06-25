@@ -1,6 +1,10 @@
 package com.basinda.services.impl;
 
+import com.basinda.contants.SecurityConstants;
 import com.basinda.entities.User;
+import com.basinda.exceptions.ResourceNotFoundException;
+import com.basinda.utils.JWTTokenUtil;
+import jakarta.servlet.http.HttpServletResponse;
 import org.modelmapper.ModelMapper;
 import jakarta.mail.MessagingException;
 import com.basinda.services.UserService;
@@ -8,6 +12,11 @@ import com.basinda.requests.LoginRequest;
 import jakarta.mail.internet.MimeMessage;
 import com.basinda.config.UserLoadService;
 import com.basinda.requests.ApproveRequest;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import com.basinda.repositories.UserRepository;
 import com.basinda.requests.RegistrationRequest;
@@ -30,7 +39,13 @@ public class UserServiceImpl implements UserService {
     private JavaMailSender mailSender;
 
     @Autowired
+    private JWTTokenUtil jwtTokenUtil;
+
+    @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private AuthenticationManager manager;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -40,12 +55,22 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public String login(LoginRequest request) {
+    public String login(LoginRequest request, final HttpServletResponse res) throws ResourceNotFoundException {
         UserDetails userDetails = userLoadService.loadUserByUsername(request.getEmail());
         if (!passwordEncoder.matches(request.getPassword(), userDetails.getPassword())){
+            throw new ResourceNotFoundException("Username or password does not match.");
+        }
+        Authentication authentication;
+        try {
+            authentication = manager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(),request.getPassword()));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            String token = jwtTokenUtil.generateToken();
+            res.setHeader(SecurityConstants.JWT_HEADER,token);
+        }
+        catch (BadCredentialsException ex){
             return "Invalid";
         }
-        return "Valid";
+        return "valid";
     }
 
     @Override

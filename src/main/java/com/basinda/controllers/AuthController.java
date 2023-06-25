@@ -1,10 +1,12 @@
 package com.basinda.controllers;
 
 import com.basinda.entities.User;
+import com.basinda.exceptions.ResourceNotFoundException;
 import com.basinda.utils.EmailUtil;
 import com.basinda.models.eUserType;
 import com.basinda.services.UserService;
 import com.basinda.requests.LoginRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 import com.basinda.responses.ResponseHeader;
 import com.basinda.repositories.UserRepository;
@@ -61,17 +63,16 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Response> login(@RequestBody LoginRequest request){
+    public ResponseEntity<Response> login(@RequestBody LoginRequest request, final HttpServletResponse res) throws ResourceNotFoundException {
         Response response = new Response();
-        String userLogin = userService.login(request);
+        String userLogin = userService.login(request, res);
         if (userLogin.equalsIgnoreCase("valid")){
             List<User> user = userRepository.findByEmail(request.getEmail());
             response.userType = user.get(0).getUserType();
             response.setContent("User Login Successfully.");
         }
         else{
-            response.setStatusCode(HttpStatus.NO_CONTENT);
-            response.setContent("Username or Password incorrect.");
+            throw new ResourceNotFoundException("Username or Password incorrect.");
         }
         return ResponseEntity.status(response.getStatusCode()).body(response);
     }
