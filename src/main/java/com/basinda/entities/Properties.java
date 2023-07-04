@@ -12,6 +12,6 @@ public class Properties {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String key;
+    private String property;
     private String value;
 }

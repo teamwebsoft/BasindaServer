@@ -1,8 +1,11 @@
 package com.basinda.config;
 
+import com.basinda.contants.PropertiesConstants;
+import com.basinda.entities.Properties;
 import com.basinda.entities.User;
 import com.basinda.models.eGenderType;
 import com.basinda.models.eUserType;
+import com.basinda.repositories.PropertiesRepository;
 import com.basinda.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,6 +23,9 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private PropertiesRepository propertiesRepository;
+
 
     @Override
     public void run(String... args) throws Exception {
@@ -36,5 +42,10 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
         user.setIsRegistered(Boolean.TRUE);
         user.setUserType(eUserType.eAdmin);
         userRepository.save(user);
+
+        Properties properties = new Properties();
+        properties.setProperty(PropertiesConstants.twoFactorEnabled);
+        properties.setValue("False");
+        propertiesRepository.save(properties);
     }
 }
