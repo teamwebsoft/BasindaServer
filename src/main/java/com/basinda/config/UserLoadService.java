@@ -22,10 +22,10 @@ public class UserLoadService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, ResourceNotFoundException {
-        String email, password = null;
+        String phone, password = null;
         List<GrantedAuthority> authorities = null;
 
-        List<User> users = userRepository.findByEmail(username);
+        List<User> users = userRepository.findByMobileNumber(username);
 
         if (users.size() == 0){
             throw new ResourceNotFoundException("User is not registered yet. Please register first");
@@ -34,11 +34,11 @@ public class UserLoadService implements UserDetailsService {
             if (!users.get(0).getEnabled() || !users.get(0).getIsRegistered()){
                 throw new ResourceNotFoundException("User is not enable or not approved yet.");
             }
-            email = users.get(0).getEmail();
+            phone = users.get(0).getMobileNumber();
             password = users.get(0).getPassword();
             authorities = new ArrayList<>();
             authorities.add(new SimpleGrantedAuthority("User"));
         }
-        return new org.springframework.security.core.userdetails.User(email,password,authorities);
+        return new org.springframework.security.core.userdetails.User(phone,password,authorities);
     }
 }

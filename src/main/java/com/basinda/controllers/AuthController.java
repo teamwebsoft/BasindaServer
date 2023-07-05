@@ -67,7 +67,7 @@ public class AuthController {
         Response response = new Response();
         String userLogin = userService.login(request, res);
         if (userLogin.equalsIgnoreCase("valid")){
-            List<User> user = userRepository.findByEmail(request.getEmail());
+            List<User> user = userRepository.findByMobileNumber(request.getMobileNumber());
             response.userType = user.get(0).getUserType();
             response.setContent("User Login Successfully.");
         }

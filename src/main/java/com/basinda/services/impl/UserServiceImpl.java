@@ -56,13 +56,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String login(LoginRequest request, final HttpServletResponse res) throws ResourceNotFoundException {
-        UserDetails userDetails = userLoadService.loadUserByUsername(request.getEmail());
+        UserDetails userDetails = userLoadService.loadUserByUsername(request.getMobileNumber());
         if (!passwordEncoder.matches(request.getPassword(), userDetails.getPassword())){
             throw new ResourceNotFoundException("Username or password does not match.");
         }
         Authentication authentication;
         try {
-            authentication = manager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(),request.getPassword()));
+            authentication = manager.authenticate(new UsernamePasswordAuthenticationToken(request.getMobileNumber(),request.getPassword()));
             SecurityContextHolder.getContext().setAuthentication(authentication);
             String token = jwtTokenUtil.generateToken();
             res.setHeader(SecurityConstants.JWT_HEADER,"Bearer "+token);
