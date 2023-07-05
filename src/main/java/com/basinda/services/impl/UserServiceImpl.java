@@ -1,9 +1,13 @@
 package com.basinda.services.impl;
 
+import com.basinda.contants.PropertiesConstants;
 import com.basinda.contants.SecurityConstants;
+import com.basinda.entities.Properties;
 import com.basinda.entities.User;
 import com.basinda.exceptions.ResourceNotFoundException;
+import com.basinda.repositories.PropertiesRepository;
 import com.basinda.utils.JwtUtils;
+import com.basinda.utils.SendOTPUtils;
 import jakarta.servlet.http.HttpServletResponse;
 import org.modelmapper.ModelMapper;
 import jakarta.mail.MessagingException;
@@ -28,6 +32,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -53,6 +58,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserLoadService userLoadService;
 
+    @Autowired
+    private PropertiesRepository propertiesRepository;
+
 
     @Override
     public String login(LoginRequest request, final HttpServletResponse res) throws ResourceNotFoundException {
@@ -60,15 +68,33 @@ public class UserServiceImpl implements UserService {
         if (!passwordEncoder.matches(request.getPassword(), userDetails.getPassword())){
             throw new ResourceNotFoundException("Username or password does not match.");
         }
-        Authentication authentication;
-        try {
-            authentication = manager.authenticate(new UsernamePasswordAuthenticationToken(request.getMobileNumber(),request.getPassword()));
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-            String token = jwtTokenUtil.generateToken();
-            res.setHeader(SecurityConstants.JWT_HEADER,"Bearer "+token);
-        }
-        catch (BadCredentialsException ex){
-            return "Invalid";
+        else{
+            List<Properties> properties = propertiesRepository.findByProperty(PropertiesConstants.twoFactorEnabled);
+            if (properties.size() != 0){
+                String twoFactorEnabled = properties.get(0).getValue();
+                if (twoFactorEnabled.equalsIgnoreCase("False")){
+                    Authentication authentication;
+                    try {
+                        authentication = manager.authenticate(new UsernamePasswordAuthenticationToken(request.getMobileNumber(),request.getPassword()));
+                        SecurityContextHolder.getContext().setAuthentication(authentication);
+                        String token = jwtTokenUtil.generateToken();
+                        res.setHeader(SecurityConstants.JWT_HEADER,"Bearer "+token);
+                    }
+                    catch (BadCredentialsException ex){
+                        return "Invalid";
+                    }
+                }
+                else{
+                    /** TODO HERE SEND OTP  */
+                    try{
+                        SendOTPUtils.send(userDetails.getUsername());
+                        return "Redirect";
+                    }
+                    catch (Exception ex){
+                        return "Invalid";
+                    }
+                }
+            }
         }
         return "valid";
     }

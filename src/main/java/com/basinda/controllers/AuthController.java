@@ -70,8 +70,9 @@ public class AuthController {
             List<User> user = userRepository.findByMobileNumber(request.getMobileNumber());
             response.userType = user.get(0).getUserType();
             response.setContent("User Login Successfully.");
-        }
-        else{
+        } else if (userLogin.equalsIgnoreCase("Redirect")) {
+            
+        } else{
             throw new ResourceNotFoundException("Username or Password incorrect.");
         }
         return ResponseEntity.status(response.getStatusCode()).body(response);

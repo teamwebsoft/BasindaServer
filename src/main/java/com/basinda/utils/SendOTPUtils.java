@@ -10,11 +10,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class SendOTPUtils {
-    private final String AUTH_TOKEN = "EPP8nMTjxEMj52J16Qy04wcnjFwkv7jx";
-    private final String ACCOUNT_STD = "SK3309e91e70ba5f28b945b8f46a88ea30";
-    private final String FROM_NUMBER = "+8801315656967";
+    private final static String AUTH_TOKEN = "EPP8nMTjxEMj52J16Qy04wcnjFwkv7jx";
+    private final static String ACCOUNT_STD = "SK3309e91e70ba5f28b945b8f46a88ea30";
+    private final static String FROM_NUMBER = "+8801315656967";
 
-    public void send(String phone) throws ParseException {
+    public static void send(String phone) throws ParseException {
         Twilio.init(ACCOUNT_STD, AUTH_TOKEN);
         int min = 100000;
         int max = 999999;
