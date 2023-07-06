@@ -140,7 +140,7 @@ public class UserServiceImpl implements UserService {
         if (user != null){
             try {
                 sendConfirmEmail(user, applicationUrl);
-                user.setIsRegistered(Boolean.TRUE);
+                user.setIsRegistered(true);
                 User response = userRepository.save(user);
                 if (response != null){
                     return true;
