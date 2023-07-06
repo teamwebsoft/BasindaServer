@@ -1,6 +1,6 @@
 package com.basinda.config;
 
-import com.basinda.entities.User;
+import com.basinda.models.entity.User;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 import com.basinda.repositories.UserRepository;

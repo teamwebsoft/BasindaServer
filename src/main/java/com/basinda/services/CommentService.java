@@ -1,6 +1,6 @@
 package com.basinda.services;
 
-import com.basinda.entities.Comment;
+import com.basinda.models.entity.Comment;
 
 import java.util.List;
 

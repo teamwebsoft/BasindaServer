@@ -1,6 +1,6 @@
 package com.basinda.services;
 
-import com.basinda.entities.Flat;
+import com.basinda.models.entity.Flat;
 
 import java.util.List;
 

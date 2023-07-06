@@ -1,6 +1,6 @@
 package com.basinda.repositories;
 
-import com.basinda.entities.Division;
+import com.basinda.models.entity.Division;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 

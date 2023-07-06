@@ -1,10 +1,10 @@
 package com.basinda.services;
 
-import com.basinda.entities.User;
+import com.basinda.models.entity.User;
 import jakarta.mail.MessagingException;
-import com.basinda.requests.LoginRequest;
-import com.basinda.requests.ApproveRequest;
-import com.basinda.requests.RegistrationRequest;
+import com.basinda.models.request.common.LoginRequest;
+import com.basinda.models.request.admin.ApproveRequest;
+import com.basinda.models.request.user.RegistrationRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.UnsupportedEncodingException;

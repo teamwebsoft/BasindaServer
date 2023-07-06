@@ -1,13 +1,12 @@
 package com.basinda.services.impl;
 
-import com.basinda.entities.Flat;
+import com.basinda.models.entity.Flat;
 import com.basinda.services.FlatService;
 import org.springframework.stereotype.Service;
 import com.basinda.repositories.FlatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class FlatServiceImpl implements FlatService {

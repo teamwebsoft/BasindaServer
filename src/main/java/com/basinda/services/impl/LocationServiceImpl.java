@@ -1,11 +1,11 @@
 package com.basinda.services.impl;
 
-import com.basinda.entities.District;
-import com.basinda.entities.Division;
-import com.basinda.entities.Pourosova;
-import com.basinda.requests.DistrictRequest;
-import com.basinda.requests.DivisionRequest;
-import com.basinda.requests.PourosovaRequest;
+import com.basinda.models.entity.District;
+import com.basinda.models.entity.Division;
+import com.basinda.models.entity.Pourosova;
+import com.basinda.models.request.admin.DistrictRequest;
+import com.basinda.models.request.admin.DivisionRequest;
+import com.basinda.models.request.admin.PourosovaRequest;
 import com.basinda.services.LocationService;
 import org.springframework.stereotype.Service;
 import com.basinda.repositories.DistrictRepository;

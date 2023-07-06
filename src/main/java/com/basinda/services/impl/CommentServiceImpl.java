@@ -1,7 +1,7 @@
 package com.basinda.services.impl;
 
-import com.basinda.entities.User;
-import com.basinda.entities.Comment;
+import com.basinda.models.entity.User;
+import com.basinda.models.entity.Comment;
 import com.basinda.services.CommentService;
 import org.springframework.stereotype.Service;
 import com.basinda.repositories.UserRepository;

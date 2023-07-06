@@ -1,10 +1,10 @@
 package com.basinda.config;
 
 import com.basinda.contants.PropertiesConstants;
-import com.basinda.entities.Properties;
-import com.basinda.entities.User;
 import com.basinda.models.eGenderType;
 import com.basinda.models.eUserType;
+import com.basinda.models.entity.Properties;
+import com.basinda.models.entity.User;
 import com.basinda.repositories.PropertiesRepository;
 import com.basinda.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        /*User user = new User();
+        User user = new User();
         user.setNid("123456789");
         user.setName("Admin");
         user.setGenderType(eGenderType.eMale);
@@ -46,6 +46,6 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
         Properties properties = new Properties();
         properties.setProperty(PropertiesConstants.twoFactorEnabled);
         properties.setValue("False");
-        propertiesRepository.save(properties);*/
+        propertiesRepository.save(properties);
     }
 }

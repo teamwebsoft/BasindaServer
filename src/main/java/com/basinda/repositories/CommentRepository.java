@@ -1,6 +1,6 @@
 package com.basinda.repositories;
 
-import com.basinda.entities.Comment;
+import com.basinda.models.entity.Comment;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 

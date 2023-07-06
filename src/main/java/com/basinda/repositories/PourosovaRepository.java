@@ -1,6 +1,6 @@
 package com.basinda.repositories;
 
-import com.basinda.entities.Pourosova;
+import com.basinda.models.entity.Pourosova;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
