@@ -91,6 +91,7 @@ public class UserServiceImpl implements UserService {
                         return "Redirect";
                     }
                     catch (Exception ex){
+                        ex.printStackTrace();
                         return "Invalid";
                     }
                 }
