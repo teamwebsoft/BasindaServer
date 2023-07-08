@@ -2,6 +2,7 @@ package com.basinda.models.entity;
 
 import com.basinda.models.entity.Comment;
 import com.basinda.models.entity.Flat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
@@ -45,6 +46,7 @@ public class User {
     private String postCode;
     @Column(name = "holdingnumber")
     private String holdingNumber;
+    @JsonIgnore
     private String password;
     @Column(name = "usertype")
     private eUserType userType;

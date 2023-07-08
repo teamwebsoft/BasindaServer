@@ -1,5 +1,6 @@
 package com.basinda.api.admin;
 
+import com.basinda.models.entity.User;
 import com.basinda.utils.EmailUtils;
 import com.basinda.services.UserService;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
@@ -22,6 +25,12 @@ public class AdminController {
 
     public class Response extends ResponseHeader{
 
+    }
+
+    @PostMapping("/allUsers")
+    public ResponseEntity<List<User>> allUsers(){
+        List<User> users = userService.allUsers();
+        return ResponseEntity.status(HttpStatus.OK).body(users);
     }
 
     @PostMapping("/approve")

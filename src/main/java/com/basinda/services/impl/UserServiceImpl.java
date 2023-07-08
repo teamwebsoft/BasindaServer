@@ -107,7 +107,7 @@ public class UserServiceImpl implements UserService {
         /** set email verification code and enable false*/
         user.setVerificationCode(randomCode);
         user.setEnabled(false);
-        user.setEnabled(Boolean.FALSE);
+        user.setIsRegistered(false);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         User response = userRepository.save(user);
         /** send mail here */
@@ -151,6 +151,11 @@ public class UserServiceImpl implements UserService {
             }
         }
         return false;
+    }
+
+    @Override
+    public List<User> allUsers() {
+        return userRepository.findAllExceptAdmin();
     }
 
     /** for verify email sender*/
