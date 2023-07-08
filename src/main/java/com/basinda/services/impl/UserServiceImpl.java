@@ -44,9 +44,6 @@ public class UserServiceImpl implements UserService {
     private JavaMailSender mailSender;
 
     @Autowired
-    private JwtUtils jwtTokenUtil;
-
-    @Autowired
     private UserRepository userRepository;
 
     @Autowired
@@ -75,10 +72,8 @@ public class UserServiceImpl implements UserService {
                 if (twoFactorEnabled.equalsIgnoreCase("False")){
                     Authentication authentication;
                     try {
-                        authentication = manager.authenticate(new UsernamePasswordAuthenticationToken(request.getMobileNumber(),request.getPassword()));
+                        authentication = manager.authenticate(new UsernamePasswordAuthenticationToken(request.getMobileNumber(),request.getPassword(),userDetails.getAuthorities()));
                         SecurityContextHolder.getContext().setAuthentication(authentication);
-                        String token = jwtTokenUtil.generateToken();
-                        res.setHeader(SecurityConstants.JWT_HEADER,"Bearer "+token);
                     }
                     catch (BadCredentialsException ex){
                         return "Invalid";

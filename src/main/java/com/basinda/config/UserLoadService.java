@@ -37,7 +37,7 @@ public class UserLoadService implements UserDetailsService {
             phone = users.get(0).getMobileNumber();
             password = users.get(0).getPassword();
             authorities = new ArrayList<>();
-            authorities.add(new SimpleGrantedAuthority("User"));
+            authorities.add(new SimpleGrantedAuthority(users.get(0).getUserType().toString()));
         }
         return new org.springframework.security.core.userdetails.User(phone,password,authorities);
     }

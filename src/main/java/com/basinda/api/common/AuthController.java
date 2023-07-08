@@ -5,6 +5,7 @@ import com.basinda.utils.EmailUtils;
 import com.basinda.models.eUserType;
 import com.basinda.services.UserService;
 import com.basinda.models.request.common.LoginRequest;
+import com.basinda.utils.JwtUtils;
 import org.springframework.http.HttpStatus;
 import com.basinda.models.response.ResponseHeader;
 import com.basinda.repositories.UserRepository;
@@ -24,6 +25,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
+    @Autowired
+    private JwtUtils jwtTokenUtil;
 
     @Autowired
     private UserService userService;
@@ -32,6 +35,11 @@ public class AuthController {
     private UserRepository userRepository;
 
     public class Response extends ResponseHeader{
+        public eUserType userType;
+    }
+
+    public class LoginResponse extends ResponseHeader{
+        public String token;
         public eUserType userType;
     }
 
@@ -63,13 +71,15 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Response> login(@RequestBody LoginRequest request, final HttpServletResponse res) throws ResourceNotFoundException {
-        Response response = new Response();
+    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request, final HttpServletResponse res) throws ResourceNotFoundException {
+        LoginResponse response = new LoginResponse();
         String userLogin = userService.login(request, res);
         if (userLogin.equalsIgnoreCase("valid")){
             List<User> user = userRepository.findByMobileNumber(request.getMobileNumber());
             response.userType = user.get(0).getUserType();
             response.setContent("User Login Successfully.");
+            String token = jwtTokenUtil.generateToken();
+            response.token = token;
         } else if (userLogin.equalsIgnoreCase("Redirect")) {
             
         } else{

@@ -52,6 +52,7 @@ public class ProjectSecurityConfig {
                                                 .toArray(RequestMatcher[]::new)
                                 )
                                 .permitAll()
+                                .requestMatchers("/admin/**").hasAuthority("eAdmin")
                                 .anyRequest()
                                 .authenticated()
                 ).addFilterBefore(new JwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)

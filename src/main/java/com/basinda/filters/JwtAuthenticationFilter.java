@@ -9,6 +9,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -16,6 +18,7 @@ import javax.crypto.SecretKey;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.List;
 
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
@@ -27,8 +30,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 SecretKey key = Keys.hmacShaKeyFor(SecurityConstants.JWT_KEY.getBytes(StandardCharsets.UTF_8));
                 Claims claims = Jwts.parser()
                         .setSigningKey(key).parseClaimsJws(token).getBody();
-                String username = claims.getSubject();
-                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(username,null,new ArrayList<>());
+                String username = claims.get("username").toString();
+                String role = claims.get("authorities").toString();
+                List<GrantedAuthority> authorities = new ArrayList<>();
+                authorities.add(new SimpleGrantedAuthority(role));
+                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(username,null,authorities);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
             catch (Exception ex){
