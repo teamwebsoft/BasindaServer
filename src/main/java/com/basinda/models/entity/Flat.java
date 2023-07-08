@@ -15,8 +15,8 @@ public class Flat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "flatname")
-    private String flatName;
+    @Column(name = "housename")
+    private String houseName;
     @Column(name = "flatside")
     private String flatSide;
     private String sqr;
@@ -26,7 +26,7 @@ public class Flat {
     private String washroom;
     private String kitchen;
     private String baranda;
-    private eAnswerType side;
+    private eAnswerType lift;
     private eAnswerType parking;
     @Column(name = "userid")
     private Long userId;

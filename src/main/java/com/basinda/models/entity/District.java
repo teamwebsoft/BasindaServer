@@ -24,5 +24,5 @@ public class District {
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "districtid", referencedColumnName = "id")
-    private List<Pourosova> pourosovas;
+    private List<Upozila> upozilas;
 }

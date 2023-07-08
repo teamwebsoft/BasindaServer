@@ -3,9 +3,12 @@ package com.basinda.services.impl;
 import com.basinda.models.entity.District;
 import com.basinda.models.entity.Division;
 import com.basinda.models.entity.Pourosova;
+import com.basinda.models.entity.Upozila;
 import com.basinda.models.request.admin.DistrictRequest;
 import com.basinda.models.request.admin.DivisionRequest;
 import com.basinda.models.request.admin.PourosovaRequest;
+import com.basinda.models.request.admin.UpozilaRequest;
+import com.basinda.repositories.UpozilaRepository;
 import com.basinda.services.LocationService;
 import org.springframework.stereotype.Service;
 import com.basinda.repositories.DistrictRepository;
@@ -24,6 +27,9 @@ public class LocationServiceImpl implements LocationService {
 
     @Autowired
     private DistrictRepository districtRepository;
+
+    @Autowired
+    private UpozilaRepository upozilaRepository;
 
     @Autowired
     private PourosovaRepository pourosovaRepository;
@@ -63,12 +69,32 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
-    public String createPourosova(PourosovaRequest request) {
+    public String createUpozila(UpozilaRequest request) {
         Optional<District> district = districtRepository.findById(request.getDistrictId());
         if (district != null) {
+            Upozila upozila = new Upozila();
+            upozila.setName(request.getName());
+            upozila.setDistrictId(request.getDistrictId());
+            Upozila createUpozila = upozilaRepository.save(upozila);
+            if (createUpozila != null) {
+                return "Created";
+            }
+            else{
+                return "Not Created";
+            }
+        }
+        else{
+            return "Not Created";
+        }
+    }
+
+    @Override
+    public String createPourosova(PourosovaRequest request) {
+        Optional<Upozila> upozila = upozilaRepository.findById(request.getUpozilaId());
+        if (upozila != null) {
             Pourosova pourosova = new Pourosova();
             pourosova.setName(request.getName());
-            pourosova.setDistrictId(request.getDistrictId());
+            pourosova.setUpozilaId(request.getUpozilaId());
             Pourosova createdPourosova = pourosovaRepository.save(pourosova);
             if (createdPourosova != null) {
                 return "Created";
@@ -93,7 +119,12 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
-    public List<Pourosova> readPourosovaForDistrict(Long districtId) {
-        return pourosovaRepository.findByDistrictId(districtId);
+    public List<Upozila> readUpozilaForDistrict(Long districtId) {
+        return upozilaRepository.findByDistrictId(districtId);
+    }
+
+    @Override
+    public List<Pourosova> readPourosovaForUpozila(Long upozilaId) {
+        return pourosovaRepository.findByUpozilaId(upozilaId);
     }
 }

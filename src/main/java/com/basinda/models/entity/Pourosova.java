@@ -1,12 +1,10 @@
 package com.basinda.models.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
-import org.modelmapper.internal.bytebuddy.asm.Advice;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Data
 @Entity
@@ -19,6 +17,6 @@ public class Pourosova {
     private Long id;
     private String name;
     @JsonIgnore
-    @Column(name = "districtid")
-    private Long districtId;
+    @Column(name = "upozilaid")
+    private Long upozilaId;
 }

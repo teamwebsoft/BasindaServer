@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class PourosovaRequest {
+public class UpozilaRequest {
     private String name;
-    private Long upozilaId;
+    private Long districtId;
 }

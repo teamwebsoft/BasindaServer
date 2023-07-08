@@ -3,6 +3,7 @@ package com.basinda.api.user;
 import com.basinda.models.entity.District;
 import com.basinda.models.entity.Division;
 import com.basinda.models.entity.Pourosova;
+import com.basinda.models.entity.Upozila;
 import com.basinda.models.response.ResponseHeader;
 import com.basinda.services.LocationService;
 import org.springframework.http.ResponseEntity;
@@ -33,9 +34,15 @@ public class LocationController {
         return ResponseEntity.ok(districts);
     }
 
-    @GetMapping("/pourosovas/{districtId}")
-    public ResponseEntity<List<Pourosova>> getAllPourosovasForDistrict(@PathVariable Long districtId){
-        List<Pourosova> pourosovas = locationService.readPourosovaForDistrict(districtId);
+    @GetMapping("/upozilas/{districtId}")
+    public ResponseEntity<List<Upozila>> getAllUpozilasForDistrict(@PathVariable Long districtId){
+        List<Upozila> upozila = locationService.readUpozilaForDistrict(districtId);
+        return ResponseEntity.ok(upozila);
+    }
+
+    @GetMapping("/pourosovas/{upozilaId}")
+    public ResponseEntity<List<Pourosova>> getAllPourosovasForDistrict(@PathVariable Long upozilaId){
+        List<Pourosova> pourosovas = locationService.readPourosovaForUpozila(upozilaId);
         return ResponseEntity.ok(pourosovas);
     }
 }
