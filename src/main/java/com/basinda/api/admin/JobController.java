@@ -1,5 +1,6 @@
 package com.basinda.api.admin;
 
+import com.basinda.models.entity.Profession;
 import org.springframework.http.HttpStatus;
 import com.basinda.services.ProfessionService;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/admin")
-public class ProfessionController {
+public class JobController {
 
     @Autowired
     private ProfessionService professionService;
@@ -25,7 +26,7 @@ public class ProfessionController {
     @PostMapping("/profession")
     public ResponseEntity<Response> createProfession(@RequestBody ProfessionRequest request){
         Response response = new Response();
-        String profession = professionService.createProfession(request);
+        Profession profession = professionService.createProfession(request);
         if (profession != null){
             response.setStatusCode(HttpStatus.CREATED);
             response.setContent("Profession created successfully.");

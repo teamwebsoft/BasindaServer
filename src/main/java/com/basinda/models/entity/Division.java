@@ -1,11 +1,10 @@
 package com.basinda.models.entity;
 
-import com.basinda.models.entity.District;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.List;
 
