@@ -1,5 +1,6 @@
 package com.basinda.api.admin;
 
+import com.basinda.models.request.admin.UpozilaRequest;
 import org.springframework.http.HttpStatus;
 import com.basinda.models.request.admin.DistrictRequest;
 import com.basinda.models.request.admin.DivisionRequest;
@@ -49,6 +50,23 @@ public class LocationCreationController {
             response.setStatusCode(HttpStatus.CREATED);
             response.setStatus(true);
             response.setContent("District created successfully.");
+        }
+        else{
+            response.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
+            response.setStatus(true);
+            response.setContent("Something went wrong please try again.");
+        }
+        return ResponseEntity.status(response.getStatusCode()).body(response);
+    }
+
+    @PostMapping("/upozila")
+    public ResponseEntity<Response> createUpozila(@RequestBody UpozilaRequest model){
+        Response response = new Response();
+        String createdUpozila = locationService.createUpozila(model);
+        if (createdUpozila.equalsIgnoreCase("created")){
+            response.setStatusCode(HttpStatus.CREATED);
+            response.setStatus(true);
+            response.setContent("Pourosova created successfully.");
         }
         else{
             response.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);

@@ -25,7 +25,7 @@ import java.util.List;
 @Configuration
 public class ProjectSecurityConfig {
 
-    List<String> whiteListUrl = List.of("/auth/register","/auth/login", "/divisions", "/districts/**","/pourosovas/**","/verify/**");
+    List<String> whiteListUrl = List.of("/auth/register", "/auth/login", "/divisions", "/districts/**", "/upozilas/**", "/pourosovas/**", "/verify/**");
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
