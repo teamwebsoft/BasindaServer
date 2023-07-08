@@ -34,7 +34,7 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        /** User user = new User();
+        User user = new User();
         user.setNid("123456789");
         user.setName("Admin");
         user.setGenderType(eGenderType.eMale);
@@ -51,7 +51,7 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
         Properties properties = new Properties();
         properties.setProperty(PropertiesConstants.twoFactorEnabled);
         properties.setValue("False");
-        propertiesRepository.save(properties);*/
+        propertiesRepository.save(properties);
 
         Profession profession1 = new Profession();
         profession1.setName("Student");
