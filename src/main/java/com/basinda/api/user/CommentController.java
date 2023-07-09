@@ -38,10 +38,4 @@ public class CommentController {
         }
         return ResponseEntity.status(response.getStatusCode()).body(response);
     }
-
-    @GetMapping("/{userId}")
-    public ResponseEntity<List<Comment>> getCommentsForSpecificUser(@PathVariable Long userId){
-        List<Comment> comments = commentService.findByUserId(userId);
-        return ResponseEntity.ok(comments);
-    }
 }

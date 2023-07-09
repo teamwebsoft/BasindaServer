@@ -39,6 +39,7 @@ public class AuthController {
     }
 
     public class LoginResponse extends ResponseHeader{
+        public String userId;
         public String token;
         public eUserType userType;
     }
@@ -76,6 +77,7 @@ public class AuthController {
         String userLogin = userService.login(request, res);
         if (userLogin.equalsIgnoreCase("valid")){
             List<User> user = userRepository.findByMobileNumber(request.getMobileNumber());
+            response.userId = user.get(0).getUserId();
             response.userType = user.get(0).getUserType();
             response.setContent("User Login Successfully.");
             String token = jwtTokenUtil.generateToken();

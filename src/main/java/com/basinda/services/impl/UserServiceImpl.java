@@ -33,6 +33,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -101,6 +102,7 @@ public class UserServiceImpl implements UserService {
         String randomCode = RandomString.make(64);
         /** set email verification code and enable false*/
         user.setVerificationCode(randomCode);
+        user.setUserId(UUID.randomUUID().toString().substring(6));
         user.setEnabled(false);
         user.setIsRegistered(false);
         user.setPassword(passwordEncoder.encode(user.getPassword()));

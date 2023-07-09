@@ -22,6 +22,8 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "userid")
+    private String userId;
     private String nid;
     private String name;
     @Column(name = "fathername")
@@ -59,11 +61,11 @@ public class User {
     @JoinColumn(name = "userid", referencedColumnName = "id")
     private List<Flat> flats;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    /**@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "userid", referencedColumnName = "id")
     private List<Comment> comments1;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "ownerid", referencedColumnName = "id")
-    private List<Comment> comments2;
+    private List<Comment> comments2;*/
 }

@@ -22,11 +22,11 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public String createComment(Comment request) throws ResourceNotFoundException{
-        User user = userRepository.findById(request.getUserId()).orElseThrow(
+        User user = userRepository.findByUserId(request.getUserId()).orElseThrow(
                 () ->  new ResourceNotFoundException("User not found.")
         );
         if (user != null) {
-            User owner = userRepository.findById(request.getOwnerId()).orElseThrow(
+            User owner = userRepository.findByUserId(request.getOwnerId()).orElseThrow(
                     () -> new ResourceNotFoundException("Owner not found.")
             );
             if (owner != null) {
@@ -39,10 +39,5 @@ public class CommentServiceImpl implements CommentService {
             }
         }
         return "Something went wrong.";
-    }
-
-    @Override
-    public List<Comment> findByUserId(Long userId) {
-        return commentRepository.findByUserId(userId);
     }
 }
