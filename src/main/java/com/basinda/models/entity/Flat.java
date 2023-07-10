@@ -1,5 +1,6 @@
 package com.basinda.models.entity;
 
+import com.basinda.models.eFlatType;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,8 @@ public class Flat {
     private String houseName;
     @Column(name = "flatside")
     private String flatSide;
+    @Column(name = "flattype")
+    private eFlatType flatType;
     private String sqr;
     private String bed;
     private String drawing;

@@ -53,6 +53,7 @@ public class ProjectSecurityConfig {
                                 )
                                 .permitAll()
                                 .requestMatchers("/admin/**").hasAuthority("eAdmin")
+                                .requestMatchers("/flats/create").hasAuthority("eLandlord")
                                 .anyRequest()
                                 .authenticated()
                 ).addFilterBefore(new JwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)

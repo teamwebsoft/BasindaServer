@@ -1,5 +1,6 @@
 package com.basinda.services.impl;
 
+import com.basinda.models.eFlatType;
 import com.basinda.models.entity.Flat;
 import com.basinda.services.FlatService;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,7 @@ public class FlatServiceImpl implements FlatService {
 
     @Override
     public Flat createFlat(Flat flat) {
+        flat.setFlatType(eFlatType.eAvailable);
         return flatRepository.save(flat);
     }
 }
