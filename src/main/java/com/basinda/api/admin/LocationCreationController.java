@@ -66,7 +66,7 @@ public class LocationCreationController {
         if (createdUpozila.equalsIgnoreCase("created")){
             response.setStatusCode(HttpStatus.CREATED);
             response.setStatus(true);
-            response.setContent("Pourosova created successfully.");
+            response.setContent("Upozila created successfully.");
         }
         else{
             response.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);

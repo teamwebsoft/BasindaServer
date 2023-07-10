@@ -1,6 +1,8 @@
 package com.basinda.filters;
 
 import com.basinda.contants.SecurityConstants;
+import com.basinda.exceptions.AuthorizationException;
+import com.basinda.exceptions.ResourceNotFoundException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -23,7 +25,7 @@ import java.util.List;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException, AuthorizationException {
         String token = request.getHeader("Authorization").substring(7);
         if (token != null){
             try{
@@ -39,7 +41,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             }
             catch (Exception ex){
                 SecurityContextHolder.clearContext();
+                throw new AuthorizationException("Unauthorized User.");
             }
+        }
+        else{
+            throw new AuthorizationException("Unauthorized User.");
         }
         filterChain.doFilter(request,response);
     }

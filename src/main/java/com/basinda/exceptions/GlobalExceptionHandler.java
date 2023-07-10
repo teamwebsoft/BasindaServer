@@ -13,6 +13,15 @@ public class GlobalExceptionHandler {
 
     }
 
+    @ExceptionHandler(AuthorizationException.class)
+    public ResponseEntity<Response> unAuthorizedUser(AuthorizationException ex){
+        Response response = new Response();
+        response.setStatusCode(HttpStatus.UNAUTHORIZED);
+        response.setStatus(true);
+        response.setContent(ex.getMessage());
+        return ResponseEntity.status(response.getStatusCode()).body(response);
+    }
+
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<Response> resourceNotFoundException(ResourceNotFoundException ex){
         Response response = new Response();
